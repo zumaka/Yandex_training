@@ -3,41 +3,36 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<ArrayList<Integer>> external1 = new ArrayList<>();
-        ArrayList<ArrayList<Integer>> external2 = new ArrayList<>();
-        List<Integer> res = new ArrayList<>();
-        Integer rem = 10;
+        ArrayList<ArrayList<Integer>> external = new ArrayList<>();
+        ArrayList<Integer> res = new ArrayList<>();
+        int rem = 10;
 
         for (int i = 0; i < 10; i++) { //create smallest hashtabs
-            ArrayList<Integer> internal1 = new ArrayList<>();
-            external1.add(internal1);
-            ArrayList<Integer> internal2 = new ArrayList<>();
-            external2.add(internal2);
+            ArrayList<Integer> internal = new ArrayList<>();
+            external.add(internal);
         }
 
         try {
             Scanner scanner = new Scanner(new File("input.txt"));
+            rem = splitLine(scanner.nextLine(), external, rem);
 
-            while (scanner.hasNextLine()) {
-                rem = splitLine(scanner.nextLine(), external1, rem);
-
-/*                while (scanner.hasNextInt()) {
-                    if (scanner.nextInt() % rem)
-                }*/
-            }
+             while (scanner.hasNextInt()) {
+                 int num = scanner.nextInt();
+                 if (external.get(num % rem).contains(num)) res.add(num);
+             }
 
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("No file");
         }
 
-
-        System.out.println(external1);
-        System.out.println(external2);
-        System.out.println(rem);
+        Collections.sort(res);
+        for (int i = 0; i < res.size(); i++) {
+            System.out.print(res.get(i) + " ");
+        }
     }
 
-    static ArrayList<ArrayList<Integer>> extendHashTable(ArrayList<ArrayList<Integer>> hashTable, int rem) {
+    static ArrayList<ArrayList<Integer>> extendHashTab(ArrayList<ArrayList<Integer>> hashTable, int rem) {
         int size = hashTable.size() * rem;
         for (int i = hashTable.size(); i < size; i++) {
             ArrayList<Integer> internal = new ArrayList<>();
@@ -62,11 +57,11 @@ public class Main {
         String[] newS = s.split("[ ]");
         for (int i = 0; i < newS.length; i++) {
             rem = list.size();
+            list.get(Integer.parseInt(newS[i]) % rem).add(Integer.parseInt(newS[i]));
             if (list.get(Integer.parseInt(newS[i]) % rem).size() == list.size()) {
-                extendHashTable(list, list.size() * 2);
+                extendHashTab(list, list.size() * 2);
                 recalculation(list, list.size() * 2);
             }
-            list.get(Integer.parseInt(newS[i]) % rem).add(Integer.parseInt(newS[i]));
         }
         return list.size();
     }
