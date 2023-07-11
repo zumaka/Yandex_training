@@ -11,10 +11,7 @@ public class Main {
         int rem = 10;
         int sum = 0;
 
-        for (int i = 0; i < 10; i++) { //create the smallest hashtab
-            ArrayList<String> internal = new ArrayList<>();
-            external.add(internal);
-        }
+        extendHashTab(external, rem);
 
         //spilt line by pairs and add it to tab. If internal list size > external list size,
         //we extend and recalculate hashTab
