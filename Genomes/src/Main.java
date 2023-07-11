@@ -16,6 +16,8 @@ public class Main {
             external.add(internal);
         }
 
+        //spilt line by pairs and add it to tab. If internal list size > external list size,
+        //we extend and recalculate hashTab
         for (int i = 1; i < firstLine.length(); i++) {
             external.get(((int)(firstLine.charAt(i - 1))
                     + (int)(firstLine.charAt(i))) % rem)
@@ -44,7 +46,8 @@ public class Main {
             hashTable.add(internal);
         }
     }
-
+    //for every internal list
+    //add first element at the end and delete it from 1st place
     static void recalculation(ArrayList<ArrayList<String>> external, int rem) {
         int len = 0;
         for (int i = 0; i < external.size(); i++) {
