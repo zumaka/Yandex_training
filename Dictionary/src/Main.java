@@ -14,7 +14,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             words = scanner.nextLine().split(" ");
             map1.put(words[0], words[1]);
-            map1.put(words[1], words[0]);
+            map2.put(words[1], words[0]);
         }
         String word = scanner.nextLine();
         if (map1.containsKey(word)) System.out.println(map1.get(word));
